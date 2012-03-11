@@ -1,0 +1,29 @@
+<%# tag definitions for the hobo_tree_table plugin %>
+
+<%# <tree-table> provides a [jQuery treeTable](http://ludo.cubicphuse.nl/jquery-plugins/treeTable/doc/).  It is used like the standard Hobo table with a couple of minor additional requirements.
+
+Rows are expected to implement two additional methods: typed_id and parent.
+
+All Hobo models implement typed_id so you only have to provide it if the rows in your table are not Hobo models.   For our purposes, typed_id returns a unique id.
+
+The parent method is what we use to determine the table hierarchy.  This method is expected to return the object's parent or nil if the object has no parents.
+
+This tag does not sort the rows, they must be provided in an order appropriate for the hierarchy.
+
+### Attributes
+
+- All options supported by [jQuery treeTable](http://ludo.cubicphuse.nl/jquery-plugins/treeTable/doc/) are supported as attributes to this tag.
+
+- `parent-method`: the method to call to get the parent.  Defaults to "parent".
+
+- All other attributes are passed through to the table tag.
+%>
+<def tag="tree-table" attrs="parent-method">
+ <% options, attrs = attributes.partition_hash(['childPrefix', 'clickableNodeNames', 'expandable', 'indent', 'initialState', 'persist', 'persistCookiePrefix', 'treeColumn'])
+    events, html_attrs = attrs.partition_hash(['onNodeShow'])
+    parent_method ||= 'parent'
+ %>
+  <table merge data-rapid="#{data_rapid('tree-table', :options => options, :events => events)}">
+    <tr: id="node-#{this.typed_id.gsub(':', '-')}" class="#{(coi=this.send(parent_method)) ? 'child-of-node-'+coi.typed_id.gsub(':', '-') : ''}"/>
+  </table>
+</def>
