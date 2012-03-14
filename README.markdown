@@ -1,6 +1,6 @@
-# hobo_tree_table
-
 This a Hobo plugin that provides [jQuery treeTable](http://ludo.cubicphuse.nl/jquery-plugins/treeTable/doc/).
+
+### Installation
 
 It can be installed into a Hobo app by typing:
 

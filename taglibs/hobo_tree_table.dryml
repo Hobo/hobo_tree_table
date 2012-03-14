@@ -1,6 +1,6 @@
 <%# tag definitions for the hobo_tree_table plugin %>
 
-<%# <tree-table> provides a [jQuery treeTable](http://ludo.cubicphuse.nl/jquery-plugins/treeTable/doc/).  It is used like the standard Hobo table with a couple of minor additional requirements.
+<%# `<tree-table>` provides a [jQuery treeTable](http://ludo.cubicphuse.nl/jquery-plugins/treeTable/doc/).  It is used like the standard Hobo table with a couple of minor additional requirements.
 
 Rows are expected to implement two additional methods: typed_id and parent.
 
