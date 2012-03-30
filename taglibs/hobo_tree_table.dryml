@@ -16,14 +16,18 @@ This tag does not sort the rows, they must be provided in an order appropriate f
 
 - `parent-method`: the method to call to get the parent.  Defaults to "parent".
 
+- `reveal`: set to the object you wish to initially display revealed
+
 - All other attributes are passed through to the table tag.
 %>
-<def tag="tree-table" attrs="parent-method">
+<def tag="tree-table" attrs="parent-method, reveal">
  <% options, attrs = attributes.partition_hash(['childPrefix', 'clickableNodeNames', 'expandable', 'indent', 'initialState', 'persist', 'persistCookiePrefix', 'treeColumn'])
     events, html_attrs = attrs.partition_hash(['onNodeShow'])
     parent_method ||= 'parent'
+    rapid_opts = {:options => options, :events => events}
+    rapid_opts[:reveal] = "node-#{reveal.typed_id.gsub(':', '-')}" if reveal
  %>
-  <table merge data-rapid="#{data_rapid('tree-table', :options => options, :events => events)}">
+  <table merge data-rapid="#{data_rapid('tree-table', rapid_opts )}">
     <tr: id="node-#{this.typed_id.gsub(':', '-')}" class="#{(coi=this.send(parent_method)) ? 'child-of-node-'+coi.typed_id.gsub(':', '-') : ''}"/>
   </table>
 </def>
