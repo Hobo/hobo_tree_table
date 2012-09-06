@@ -15,6 +15,5 @@ Gem::Specification.new do |s|
 
   s.files = `git ls-files -z`.split("\0")
 
-  s.add_dependency "rails", "~> 3.1.0"
   s.add_runtime_dependency("hobo", ["~> 1.4.0.pre1"])
 end
